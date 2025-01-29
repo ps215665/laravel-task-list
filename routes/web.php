@@ -75,3 +75,11 @@ Route::put('tasks/{id}/update', function($id) {
 Route::fallback(function () {
     return 'This is the fallback route';
 });
+
+//Delete Task
+Route::delete('/tasks/{id}/delete', function($id) {
+    $task = \App\Models\Task::findOrFail($id);
+    $task->delete();
+
+    return redirect()->route('index')->with('success', 'Task has been deleted');
+})->name('tasks.delete');
